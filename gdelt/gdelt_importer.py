@@ -12,7 +12,9 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(message)s")
 
 class gdelt_importer:
-
+    '''
+    Expects a running postgres database to be coupled to localhost to import the data into the apprpriate tables
+    '''
     def __init__(self) -> None:
         self.year = datetime.today().strftime('%Y')
         self.month = datetime.today().strftime('%m')
@@ -21,9 +23,11 @@ class gdelt_importer:
         self.gd2 = gdelt.gdelt(version=2)
         self.engine = create_engine('postgresql+psycopg2://postgres:@localhost:5432/film', )
 
-
-    #last command:  python -m cli download-gdelt-v1 "1982-01-02" "1983-01-01"
+    # last command:  python -m cli download-gdelt-v1 "1982-01-02" "1983-01-01"\
     def import_bulk_v1(self, min_date: str, max_date: str):
+        '''
+        imports from gdelt v1 event database
+        '''
         date_time_start = datetime.strptime(min_date, '%Y-%m-%d')
         date_time_end = datetime.strptime(max_date, '%Y-%m-%d')
         try:
@@ -33,7 +37,6 @@ class gdelt_importer:
         except ValueError as e:
             print(e)
         print("Done!")
-
 
         df_gkgs = pd.DataFrame()
         for single_date in self._daterange(date_time_start, date_time_end):
