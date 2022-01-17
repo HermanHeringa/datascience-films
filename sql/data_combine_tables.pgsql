@@ -3,15 +3,22 @@
 	genre varchar
 );
 	
+
+	CREATE TABLE data.historical_events_labels(
+    id SERIAL,
+	historical_event varchar
+);
 	
-	create table data.non_historical as 
+	
+	
+	create temp table A00_Non_historical as 
 	select t1."primaryTitle" 
 	, t1."startYear" as movie_release_year
 	, t2."date" as event_year
 	, t2."EVENTID" 
 	, t1.genres 
 	, t2."SUMMARY" 
-	, t1.genre
+	, t1.genres
 	, t1.plot 
 	, t1."numVotes" 
 	, t1."averageRating" 
@@ -28,6 +35,23 @@
 	or t2."ACTOR1" = any(string_to_array(t1.plot,' ')))
 	where t1.historical_event is null 
 	
+	create temp table A05_joined_labels_non_historical as 
+	select t1."primaryTitle" 
+	, t1.movie_release_year
+	, t1.event_year
+	, t1."EVENTID" 
+	, t2.id as genre_label
+	, t1."SUMMARY" 
+	, t1.plot 
+	, t1."numVotes" 
+	, t1."averageRating" 
+	, t1.historical_event 
+	, t1."COUNTRY" 
+	, t1."CITY" 
+	from A00_Non_historical as t1
+	join data.genre_labels as t2 on 
+	split_part(t1.genres,',',1) = t2.genre 
+
 
 	create TEMP table A00_historical_imdb as 
 	select t1."primaryTitle" 
@@ -156,13 +180,7 @@
 	and 
 	
 	
-	
-	select string_to_array('a v c d',' ') 
-	where string_to_array('a b c d',' ') && string_to_array('a b c d e',' ')
-	
-	
-	select ARRAY[3,4,1] && ARRAY[2,1]
-	
+
 	
 	
 	
