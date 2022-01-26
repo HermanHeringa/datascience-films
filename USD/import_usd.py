@@ -43,7 +43,6 @@ def import_cities():
     '''
     df = pd.read_excel(DIR/'cities.xlsx')
     df.to_sql(name='cities', con=ENGINE, if_exists='replace',index=False, schema='usd') 
-    pass
 
 
 
@@ -54,7 +53,6 @@ def import_city_years():
     '''
     df = pd.read_excel(DIR/'cityyear.xlsx')
     df.to_sql(name='city_year', con=ENGINE, if_exists='replace',index=False, schema='usd') 
-    pass
 
 
 @click.command()
@@ -64,5 +62,4 @@ def import_reports():
     '''
     df = pd.read_excel(DIR/'reports.xlsx')
     df.to_sql(name='reports', con=ENGINE, if_exists='replace',index=False, schema='usd') 
-    pass
 

@@ -11,6 +11,7 @@ select t1."primaryTitle"
 , t1."averageRating" 
 , t2."COUNTRY" 
 , t2."CITY" 
+, t1.historical_event
 from imdb.filtered as t1 
 join data.news as t2 on 
 date_part('year',t2."date") between t1."startYear" - 1 and "startYear" 
@@ -36,6 +37,7 @@ select t1.title
 , t1.avg_rat
 , t2."COUNTRY" 
 , t2."CITY" 
+, t1.historical_event
 from movielens.filtered as t1 
 join data.news as t2 on 
 date_part('year',t2."date") between t1."year" - 1 and "year" 
@@ -63,6 +65,7 @@ t1.title
 , t1.vote_average
 , t2."COUNTRY" 
 , t2."CITY" 
+, t1.historical_event
 from kaggle.filtered as t1 
 join data.news as t2 on 
 date_part('year',t2."date") between t1.movie_release_year - 1 and t1.movie_release_year 

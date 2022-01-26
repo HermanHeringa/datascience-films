@@ -1,16 +1,12 @@
-	CREATE TABLE data.genre_labels(
-    id SERIAL,
-	genre varchar
-);
-	
-
 	CREATE TABLE data.historical_events_labels(
     id SERIAL,
 	historical_event varchar
 );
 	
 	
-	
+	/*
+		Joins post-filtered movies to real life events that happened based on city, country or similarities in plot.
+	*/
 	create temp table A00_Non_historical as 
 	select t1."primaryTitle" 
 	, t1."startYear" as movie_release_year

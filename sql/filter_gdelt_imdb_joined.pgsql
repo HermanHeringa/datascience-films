@@ -35,17 +35,8 @@ BEGIN
     from gdelt.filtered 
     where target_country = 'VNM'
 	
-    
-    select * from A00_gdelt_filtered
-    
-    --filter only the extremes, these are big events 
-    create temp table A05_gdelt_extremes as
-	select * from A00_gdelt_filtered
-	where "GoldsteinScale" >= 8 
-	or "GoldsteinScale" <= -8
    	
 	
-	select * from A05_gdelt_extremes
 	
     CREATE TEMP TABLE B00_imdb_filtered as
     SELECT

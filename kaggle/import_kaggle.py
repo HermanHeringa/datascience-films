@@ -15,6 +15,13 @@ for row_no, row in enumerate(df.genres):
     for index, genre in enumerate(json.loads(row)):
         row_genres.append(genre['name'])
     df.loc[df.index == row_no, 'genres'] =  ",".join(row_genres)
+
+
+for row_no, row in enumerate(df.keywords):
+    keywords = []
+    for index, keyword in enumerate(json.loads(row)):
+        keywords.append(keyword['name'])
+    df.loc[df.index == row_no, 'keywords'] =  ",".join(keywords)
 print(df.head(5))
 df.to_sql(name='raw', con=engine, if_exists='replace',index=False, schema='kaggle') 
 

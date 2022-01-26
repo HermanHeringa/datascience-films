@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS movielens.filtered;
-CREATE TABLE movielens.filtered AS 
+create table movielens.filtered as 
 SELECT 
     t1."movieId" 
     ,t1.title
@@ -18,6 +18,11 @@ SELECT
     , t1.gem_rat as avg_rat
     , t1.amount
     , t2."events depicted" 
+    , case when 'hitler' = any(string_to_array(t2."events depicted",' ')) then 'second world war'
+    when 'vietnam' = any(string_to_array(lower(t2."events depicted"),' ')) 
+    or 'vietnam war' = any(string_to_array(lower(t2."events depicted"),' ')) 
+    or 'guerilla' = any(string_to_array(lower(t2."events depicted"),' ')) then 'Vietnam War'
+	end as historical_event
 FROM movielens.movies as t1
 LEFT JOIN movielens.vietnam_movies as t2 on 
     t1."movieId" = t2."movieId" 
