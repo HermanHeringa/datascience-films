@@ -1,2 +1,2 @@
-model_checkpoint_path: "Model_vietnam_save_genres"
-all_model_checkpoint_paths: "Model_vietnam_save_genres"
+model_checkpoint_path: "cross_validated_save_RMSLE_Adam"
+all_model_checkpoint_paths: "cross_validated_save_RMSLE_Adam"

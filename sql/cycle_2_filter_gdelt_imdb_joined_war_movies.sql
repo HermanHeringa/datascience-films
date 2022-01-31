@@ -1,4 +1,8 @@
 
+/* Used for cycle 2: joins only the movies of the genre war or documentary together
+with the news data 
+*/
+
 create or replace procedure data.filter_gdelt_imdb_war_movies()
 as $$
 
